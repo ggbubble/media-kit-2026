@@ -105,19 +105,18 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .card-desc{font-size:13px;line-height:1.6;color:var(--ink);opacity:.6}
 
 /* ── WORK ── */
-#work{padding:80px 0 120px;overflow:hidden}
+#work{padding:80px 0 120px}
 .work-header{padding:0 var(--pad);margin-bottom:48px}
 .work-header-text{max-width:var(--max);margin:0 auto;display:flex;align-items:flex-end;justify-content:space-between}
 .scroll-hint{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--ink);opacity:.4;display:flex;align-items:center;gap:8px}
 .scroll-hint::before{content:'';width:32px;height:1px;background:currentColor;display:inline-block}
 
-/* The scroll trap wrapper */
-.work-scroll-trap{position:relative}
+/* Key fix: no overflow:hidden on outer, let track scroll freely */
 .work-track{
   display:flex;gap:20px;
-  padding:16px var(--pad) 32px;
-  overflow-x:auto;
-  overflow-y:hidden;
+  padding:16px var(--pad) 48px;
+  overflow-x:scroll;
+  overflow-y:visible;
   scroll-snap-type:x mandatory;
   -webkit-overflow-scrolling:touch;
   scrollbar-width:none;
