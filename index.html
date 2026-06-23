@@ -574,7 +574,7 @@ document.getElementById('hero').addEventListener('mousemove',e=>{
 
 // ── HERO NAME ──
 const hn=document.getElementById('hn');
-const intro="hi, i’m";
+const intro="Hi,  I’m";
 const name2="ggbubbletea";
 let h='<span class="line-intro">';
 [...intro].forEach((c,i)=>h+=`<span class="char" style="animation-delay:${0.3+i*0.045}s">${c}</span>`);
@@ -601,17 +601,19 @@ heroSection.addEventListener('mouseleave',()=>{
 
 // ── HORIZONTAL SCROLL — wheel trap ──
 const track=document.getElementById('work-track');
-track.addEventListener('wheel',function(e){
-  const delta=Math.abs(e.deltaX)>Math.abs(e.deltaY)?e.deltaX:e.deltaY;
-  const atStart=track.scrollLeft<=0;
+let scrollingH=false,releaseTimer=null;
+track.addEventListener('wheel',e=>{
+  const atStart=track.scrollLeft===0;
   const atEnd=track.scrollLeft>=track.scrollWidth-track.clientWidth-2;
-  if((delta>0&&!atEnd)||(delta<0&&!atStart)){
+  // If we can still scroll horizontally in the wheel direction, trap it
+  const goingRight=e.deltaY>0||e.deltaX>0;
+  const goingLeft=e.deltaY<0||e.deltaX<0;
+  if((goingRight&&!atEnd)||(goingLeft&&!atStart)){
     e.preventDefault();
-    e.stopPropagation();
-    track.scrollLeft+=delta;
+    track.scrollLeft+=e.deltaY||e.deltaX;
   }
   // If at an end and still going that direction, let page scroll (don't prevent)
-},{passive:false,capture:false});
+},{passive:false});
 
 // ── STAT COUNTER ──
 function counter(el){
