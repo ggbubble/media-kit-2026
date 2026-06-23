@@ -610,6 +610,7 @@ track.addEventListener('wheel',function(e){
     e.stopPropagation();
     track.scrollLeft+=delta;
   }
+  // If at an end and still going that direction, let page scroll (don't prevent)
 },{passive:false,capture:false});
 
 // ── STAT COUNTER ──
