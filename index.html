@@ -125,7 +125,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
   display:flex;align-items:center;justify-content:center;
   transition:border-color .2s,box-shadow .2s,transform .2s;
   cursor:default;min-width:80px;
-  
+    .logo-crop{
+  height:32px;
+  width:130px;
+  object-fit:cover;
+  object-position:center;
+  transform:scale(1,1.5);
+}
 }
 .partner-card:hover{border-color:var(--periwinkle);box-shadow:0 6px 20px rgba(201,184,232,.3);transform:translateY(-2px)}
 .partner-card img{height:32px;width:auto;max-width:130px;object-fit:contain;display:block}
@@ -133,13 +139,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .partner-card.dark-bg{background:#111;border-color:rgba(0,0,0,.1)}
 .partner-card.dark-bg:hover{border-color:#333}
 
-  .logo-crop{
-  height:32px;
-  width:130px;
-  object-fit:cover;
-  object-position:center;
-  transform:scale(1,1.5);
-}
   
 #contact{background:var(--plum);padding:140px var(--pad);text-align:center;position:relative;overflow:hidden}
 #contact::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(221,208,240,.12) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
