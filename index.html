@@ -85,7 +85,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 /* Key: no overflow hidden on any parent, just the track itself scrolls */
 .work-track{display:flex;gap:20px;padding:16px var(--pad) 48px;overflow-x:scroll;overflow-y:visible;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .work-track::-webkit-scrollbar{display:none}
-.work-card{flex:0 0 300px;border-radius:20px;overflow:hidden;background:white;scroll-snap-align:start;box-shadow:0 4px 20px rgba(42,31,45,.08);transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s;cursor:pointer;text-decoration:none;display:block;color:inherit;position:relative}
+.work-card{flex:0 0 300px;border-radius:20px;overflow:hidden;background:white;scroll-snap-align:start;box-shadow:0 4px 20px rgba(42,31,45,.08);transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s;cursor:inherit;text-decoration:none;display:block;color:inherit;position:relative}
 .work-card:hover{transform:translateY(-8px) scale(1.02);box-shadow:0 20px 48px rgba(42,31,45,.14)}
 .work-card-img{width:100%;height:360px;object-fit:cover;display:block;transition:transform .4s ease}
 .work-card:hover .work-card-img{transform:scale(1.04)}
@@ -538,8 +538,6 @@ const track=document.getElementById('work-track');
 track.addEventListener('wheel',function(e){
   const absX=Math.abs(e.deltaX);
   const absY=Math.abs(e.deltaY);
-  // Only take over if it's clearly a horizontal gesture (trackpad side-swipe)
-  // Let ALL vertical scroll pass through to the page
   if(absX>absY && absX>4){
     const atStart=track.scrollLeft<=0;
     const atEnd=track.scrollLeft>=track.scrollWidth-track.clientWidth-2;
@@ -548,8 +546,82 @@ track.addEventListener('wheel',function(e){
       track.scrollLeft+=e.deltaX;
     }
   }
-  // If vertical dominant — do nothing, let page scroll naturally
 },{passive:false});
+
+// WORK TRACK — polished click-and-drag with momentum
+(function(){
+  let isDown=false, startX=0, scrollStart=0;
+  let hasDragged=false, dragEndTime=0;
+  let velX=0, lastX=0, lastT=0, rafId=null;
+
+  function setSnap(on){
+    track.style.scrollSnapType=on?'x mandatory':'none';
+  }
+
+  track.style.cursor='grab';
+
+  track.addEventListener('mousedown',e=>{
+    if(e.button!==0)return;
+    if(rafId){cancelAnimationFrame(rafId);rafId=null;}
+    isDown=true;
+    hasDragged=false;
+    startX=e.clientX;
+    scrollStart=track.scrollLeft;
+    velX=0;lastX=e.clientX;lastT=Date.now();
+    setSnap(false);
+    track.style.cursor='grabbing';
+    document.body.style.userSelect='none';
+    e.preventDefault();
+  });
+
+  document.addEventListener('mousemove',e=>{
+    if(!isDown)return;
+    const dx=e.clientX-startX;
+    if(Math.abs(dx)>4)hasDragged=true;
+    track.scrollLeft=scrollStart-dx;
+    const now=Date.now(),dt=now-lastT;
+    if(dt>0)velX=(e.clientX-lastX)/dt;
+    lastX=e.clientX;lastT=now;
+  });
+
+  function endDrag(){
+    if(!isDown)return;
+    isDown=false;
+    document.body.style.userSelect='';
+    track.style.cursor='grab';
+    if(hasDragged)dragEndTime=Date.now();
+
+    const momentum=velX*180;
+    const startScroll=track.scrollLeft;
+    const target=startScroll-momentum;
+    const startTime=Date.now();
+    const duration=420;
+    const easeOut=t=>1-Math.pow(1-t,3);
+
+    if(Math.abs(momentum)>10){
+      (function animateMomentum(){
+        const p=Math.min((Date.now()-startTime)/duration,1);
+        track.scrollLeft=startScroll+(target-startScroll)*easeOut(p);
+        if(p<1){rafId=requestAnimationFrame(animateMomentum);}
+        else{setSnap(true);rafId=null;}
+      })();
+    } else {
+      setSnap(true);
+    }
+  }
+
+  document.addEventListener('mouseup',endDrag);
+  document.addEventListener('mouseleave',endDrag);
+
+  // Block clicks for 300ms after any drag ends — covers both the immediate
+  // mouseup click and any click that fires during the momentum animation.
+  track.addEventListener('click',e=>{
+    if(hasDragged||Date.now()-dragEndTime<300){
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  },true);
+})();
 
 // STAT COUNTER
 function counter(el){
