@@ -88,7 +88,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .scroll-hint{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--ink);opacity:.4;display:flex;align-items:center;gap:8px}
 .scroll-hint::before{content:'';width:32px;height:1px;background:currentColor;display:inline-block}
 /* Key: no overflow hidden on any parent, just the track itself scrolls */
-.work-track{display:flex;gap:20px;padding:16px var(--pad) 48px;overflow-x:scroll;overflow-y:visible;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.work-track{display:flex;gap:20px;padding:16px var(--pad) 48px;padding-left:max(var(--pad),calc((100% - var(--max))/2));overflow-x:scroll;overflow-y:visible;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .work-track::-webkit-scrollbar{display:none}
 .work-card{flex:0 0 300px;border-radius:20px;overflow:hidden;background:white;scroll-snap-align:start;box-shadow:0 4px 20px rgba(42,31,45,.08);transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s;cursor:inherit;text-decoration:none;display:block;color:inherit;position:relative}
 .work-card:hover{transform:translateY(-8px) scale(1.02);box-shadow:0 20px 48px rgba(42,31,45,.14)}
@@ -110,7 +110,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .spec-row{display:flex;align-items:baseline;gap:16px;padding:18px 0;border-bottom:1px solid rgba(42,31,45,.08)}
 .spec-key{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--periwinkle);text-transform:uppercase;min-width:90px;flex-shrink:0}
 .spec-val{font-size:14px;color:var(--ink);line-height:1.5;opacity:.8}
-.phone-wrap{max-width:260px;margin:0 auto;position:relative}
+.phone-wrap{max-width:260px;margin:0 auto;position:relative;will-change:transform}
 .phone-shell{background:linear-gradient(145deg,var(--lavender) 0%,var(--periwinkle) 60%,#b8a8e0 100%);border-radius:44px;padding:14px;box-shadow:0 0 0 1px rgba(255,255,255,.4) inset,0 40px 80px rgba(42,31,45,.22),0 8px 24px rgba(201,184,232,.4);position:relative}
 .phone-shell::before{content:'';position:absolute;top:8px;left:12px;right:60%;bottom:50%;background:linear-gradient(135deg,rgba(255,255,255,.35) 0%,transparent 100%);border-radius:30px 20px 0 0;pointer-events:none}
 .phone-screen{border-radius:32px;overflow:hidden;aspect-ratio:9/16;position:relative;background:var(--cream)}
@@ -169,6 +169,7 @@ footer span{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;c
 @keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
 @media(max-width:900px){
   :root{--pad:24px}.nav-links{display:none}
+  #hero{padding-bottom:160px}
   .hero-inner{grid-template-columns:1fr}.hero-photos{order:-1;height:400px}
   .photo-primary{width:70%}.photo-secondary{width:54%;height:48%}
   .stats-inner{grid-template-columns:1fr}
@@ -700,6 +701,30 @@ new IntersectionObserver(entries=>{
       if(offset > CAP) offset = CAP; else if(offset < -CAP) offset = -CAP;
       el.style.transform = 'translateY(' + offset.toFixed(1) + 'px)';
     }
+  }
+  function onScroll(){ if(!ticking){ ticking = true; requestAnimationFrame(update); } }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  update();
+})();
+
+// PHONE SPIN-IN — the "what you get" mockup grows and spins flat as it scrolls in
+(function(){
+  var phone = document.querySelector('.phone-wrap');
+  if(!phone) return;
+  var vh = window.innerHeight;
+  window.addEventListener('resize', function(){ vh = window.innerHeight; }, {passive:true});
+  var ticking = false;
+  function update(){
+    ticking = false;
+    var r = phone.getBoundingClientRect();
+    // 0 when the mockup first enters from the bottom, 1 once it reaches viewport center
+    var p = (vh - r.top) / (vh * 0.5 + r.height * 0.5);
+    if(p < 0) p = 0; else if(p > 1) p = 1;
+    var eased = 1 - Math.pow(1 - p, 3); // easeOutCubic for a smooth settle
+    var scale = 0.62 + 0.38 * eased;    // grows from 0.62 -> 1
+    var rotY = (1 - eased) * -32;       // spins in from -32deg -> 0
+    var rotZ = (1 - eased) * -6;        // slight tilt that straightens out
+    phone.style.transform = 'perspective(1100px) rotateY(' + rotY.toFixed(1) + 'deg) rotateZ(' + rotZ.toFixed(1) + 'deg) scale(' + scale.toFixed(3) + ')';
   }
   function onScroll(){ if(!ticking){ ticking = true; requestAnimationFrame(update); } }
   window.addEventListener('scroll', onScroll, {passive:true});
