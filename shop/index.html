@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ggbubbletea · Shop</title>
+<meta name="description" content="My storefront — everything I promote, with discount codes. Cute tech, soft aesthetic.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--blush:#F5E6E8;--lavender:#DDD0F0;--cream:#FAF7F5;--plum:#2A1F2D;--periwinkle:#C9B8E8;--rose:#F2D4D7;--ink:#3D2D42;--max:760px;--pad:24px}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:var(--ink);background:var(--cream);-webkit-font-smoothing:antialiased;min-height:100vh;position:relative;overflow-x:hidden}
+/* soft ambient background wash */
+body::before{content:'';position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse 60% 50% at 20% 10%,rgba(221,208,240,.55) 0%,transparent 60%),radial-gradient(ellipse 55% 45% at 85% 30%,rgba(242,212,215,.5) 0%,transparent 60%),radial-gradient(ellipse 60% 50% at 50% 100%,rgba(201,184,232,.4) 0%,transparent 65%);background-color:var(--cream)}
+
+.wrap{max-width:var(--max);margin:0 auto;padding:56px var(--pad) 80px}
+
+/* header */
+.shop-head{text-align:center;margin-bottom:44px}
+.shop-logo{font-family:'Fraunces',serif;font-size:22px;font-weight:400;letter-spacing:-.01em;color:var(--plum);text-decoration:none;display:inline-block;margin-bottom:24px}
+.shop-avatar{width:96px;height:96px;border-radius:50%;object-fit:cover;margin:0 auto 18px;display:block;box-shadow:0 12px 30px rgba(42,31,45,.18);border:3px solid #fff}
+.shop-avatar.placeholder{background:linear-gradient(145deg,var(--lavender),var(--periwinkle));display:flex;align-items:center;justify-content:center;font-size:38px}
+.shop-title{font-family:'Fraunces',serif;font-size:clamp(30px,7vw,44px);font-weight:300;line-height:1.04;letter-spacing:-.02em;color:var(--plum);margin-bottom:12px}
+.shop-title em{font-style:italic;color:var(--periwinkle)}
+.shop-sub{font-size:14px;line-height:1.65;color:rgba(61,45,66,.72);max-width:420px;margin:0 auto}
+.shop-tag{display:inline-flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--periwinkle);margin-bottom:16px}
+
+/* collection */
+.collection{margin-bottom:48px}
+.collection-head{display:flex;align-items:baseline;gap:12px;margin-bottom:20px;padding:0 2px}
+.collection-name{font-family:'Fraunces',serif;font-size:22px;font-weight:400;color:var(--plum)}
+.collection-count{font-family:'DM Mono',monospace;font-size:11px;color:rgba(61,45,66,.45)}
+.collection-line{flex:1;height:1px;background:linear-gradient(90deg,rgba(201,184,232,.5),transparent)}
+
+/* product card */
+.card{display:flex;gap:18px;background:#fff;border-radius:22px;padding:16px;box-shadow:0 6px 22px rgba(42,31,45,.07);margin-bottom:16px;transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s;align-items:center}
+.card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(42,31,45,.13)}
+.card-img{flex:0 0 104px;width:104px;height:104px;border-radius:16px;object-fit:cover;background:var(--blush)}
+.card-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:10px}
+.card-name{font-family:'DM Sans',sans-serif;font-size:16px;font-weight:500;color:var(--plum);line-height:1.25}
+.card-note{font-size:12px;color:rgba(61,45,66,.6);margin-top:-4px}
+.card-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:2px}
+
+.buy-btn{display:inline-flex;align-items:center;gap:7px;background:var(--plum);color:#fff;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;text-decoration:none;padding:11px 20px;border-radius:100px;transition:background .25s,transform .25s}
+.buy-btn:hover{background:#42304a}
+.buy-btn:active{transform:scale(.96)}
+.buy-btn svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2.2}
+
+/* copyable discount code */
+.code{display:inline-flex;align-items:center;gap:8px;background:var(--blush);border:1px dashed var(--periwinkle);color:var(--plum);font-family:'DM Mono',monospace;font-size:12px;font-weight:500;padding:9px 14px;border-radius:12px;cursor:pointer;transition:background .2s,transform .2s;position:relative;-webkit-tap-highlight-color:transparent}
+.code:hover{background:#f6dde0}
+.code:active{transform:scale(.96)}
+.code .code-label{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--periwinkle)}
+.code .code-val{letter-spacing:.04em}
+.code .copy-ic{width:13px;height:13px;fill:none;stroke:var(--periwinkle);stroke-width:2;flex-shrink:0}
+.code.copied{background:var(--lavender);border-style:solid}
+.code.copied .copied-flag{opacity:1;transform:translateY(0)}
+.copied-flag{position:absolute;top:-9px;right:8px;background:var(--plum);color:#fff;font-size:8px;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:8px;opacity:0;transform:translateY(4px);transition:opacity .2s,transform .2s;pointer-events:none}
+
+/* footer */
+.shop-foot{text-align:center;margin-top:48px;font-family:'DM Mono',monospace;font-size:11px;color:rgba(61,45,66,.5)}
+.shop-foot a{color:var(--periwinkle);text-decoration:none}
+.shop-foot .disc{display:block;margin-top:10px;font-size:10px;color:rgba(61,45,66,.4);max-width:460px;margin-left:auto;margin-right:auto;line-height:1.6}
+
+@media(max-width:480px){
+  .card{gap:14px;padding:13px}
+  .card-img{flex-basis:84px;width:84px;height:84px}
+  .card-name{font-size:15px}
+  .buy-btn{padding:10px 16px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="shop-head">
+    <a class="shop-logo" href="/">ggbubbletea ✦</a>
+    <!-- To add your profile photo: save it as images/avatar.jpg and remove the "placeholder" class + the ✦ below -->
+    <div class="shop-avatar placeholder">✦</div>
+    <p class="shop-tag">✦ My storefront</p>
+    <h1 class="shop-title">Everything I <em>actually</em> use & love</h1>
+    <p class="shop-sub">My honest picks of cute tech and soft-aesthetic gear — with my discount codes. Tap a code to copy it. 💞</p>
+  </header>
+
+  <!-- ===== COLLECTION: Insta360 ===== -->
+  <section class="collection">
+    <div class="collection-head">
+      <h2 class="collection-name">Insta360</h2>
+      <span class="collection-count">3 products</span>
+      <span class="collection-line"></span>
+    </div>
+
+    <article class="card">
+      <img class="card-img" src="images/go-ultra-hello-kitty.jpg" alt="Insta360 Go Ultra Hello Kitty Bundle" loading="lazy">
+      <div class="card-body">
+        <h3 class="card-name">Go Ultra · Hello Kitty Bundle</h3>
+        <div class="card-actions">
+          <a class="buy-btn" href="https://store.insta360.com/product/go-ultra?c=6753?utm_term=GGBUBBLE&utm_source=AffiliateCenter&utm_medium=tiktok&utm_campaign=GOUltraHelloKittyBundle&utm_content=date20260611ggbubble.tea" target="_blank" rel="noopener">Shop now <svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+          <button class="code" type="button" data-code="GGBUBBLE"><svg class="copy-ic" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span><span class="code-label">Free gift code</span><br><span class="code-val">GGBUBBLE</span></span><span class="copied-flag">Copied!</span></button>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <img class="card-img" src="images/go-ultra.jpg" alt="Insta360 Go Ultra" loading="lazy">
+      <div class="card-body">
+        <h3 class="card-name">Go Ultra</h3>
+        <div class="card-actions">
+          <a class="buy-btn" href="https://store.insta360.com/au/product/go-ultra?utm_medium=copylink&utm_source=AffiliateCenter&utm_term=GGBUBBLE" target="_blank" rel="noopener">Shop now <svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+          <button class="code" type="button" data-code="GGBUBBLE"><svg class="copy-ic" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span><span class="code-label">Discount code</span><br><span class="code-val">GGBUBBLE</span></span><span class="copied-flag">Copied!</span></button>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <img class="card-img" src="images/go-3s.jpg" alt="Insta360 Go 3S" loading="lazy">
+      <div class="card-body">
+        <h3 class="card-name">Go 3S</h3>
+        <div class="card-actions">
+          <a class="buy-btn" href="https://www.insta360.com/sal/go-3s?utm_term=GGBUBBLE" target="_blank" rel="noopener">Shop now <svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+          <button class="code" type="button" data-code="GGBUBBLE"><svg class="copy-ic" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span><span class="code-label">Discount code</span><br><span class="code-val">GGBUBBLE</span></span><span class="copied-flag">Copied!</span></button>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ===== COLLECTION: Displays ===== -->
+  <section class="collection">
+    <div class="collection-head">
+      <h2 class="collection-name">Displays</h2>
+      <span class="collection-count">2 products</span>
+      <span class="collection-line"></span>
+    </div>
+
+    <article class="card">
+      <img class="card-img" src="images/divoom-timesframe.jpg" alt="Divoom TimesFrame" loading="lazy">
+      <div class="card-body">
+        <h3 class="card-name">Divoom TimesFrame</h3>
+        <p class="card-note">10% off with code</p>
+        <div class="card-actions">
+          <a class="buy-btn" href="https://collabs.shop/gahpq8" target="_blank" rel="noopener">Shop now <svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+          <button class="code" type="button" data-code="GGBUBBLETEA"><svg class="copy-ic" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span><span class="code-label">10% off code</span><br><span class="code-val">GGBUBBLETEA</span></span><span class="copied-flag">Copied!</span></button>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <img class="card-img" src="images/portable-display.jpg" alt="Portable display" loading="lazy">
+      <div class="card-body">
+        <h3 class="card-name">Portable Display</h3>
+        <p class="card-note">$100 AUD off bundle</p>
+        <div class="card-actions">
+          <a class="buy-btn" href="https://app.temu.com/k/gzxhig32l7o" target="_blank" rel="noopener">Shop now <svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+          <button class="code" type="button" data-code="kkd3596"><svg class="copy-ic" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span><span class="code-label">$100 AUD code</span><br><span class="code-val">kkd3596</span></span><span class="copied-flag">Copied!</span></button>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <footer class="shop-foot">
+    <a href="/">← back to ggbubbletea</a>
+    <span class="disc">Some links are affiliate links — I may earn a small commission at no extra cost to you. I only feature things I genuinely use and love. 💞</span>
+  </footer>
+
+</div>
+
+<script>
+// Tap-to-copy discount codes
+document.querySelectorAll('.code').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var code = btn.getAttribute('data-code');
+    var done = function(){
+      btn.classList.add('copied');
+      setTimeout(function(){ btn.classList.remove('copied'); }, 1600);
+    };
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(code).then(done).catch(fallback);
+    } else { fallback(); }
+    function fallback(){
+      var t = document.createElement('textarea');
+      t.value = code; t.style.position='fixed'; t.style.opacity='0';
+      document.body.appendChild(t); t.focus(); t.select();
+      try{ document.execCommand('copy'); }catch(e){}
+      document.body.removeChild(t); done();
+    }
+  });
+});
+</script>
+</body>
+</html>
