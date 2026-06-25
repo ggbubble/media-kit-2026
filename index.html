@@ -110,8 +110,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .spec-row{display:flex;align-items:baseline;gap:16px;padding:18px 0;border-bottom:1px solid rgba(42,31,45,.08)}
 .spec-key{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--periwinkle);text-transform:uppercase;min-width:90px;flex-shrink:0}
 .spec-val{font-size:14px;color:var(--ink);line-height:1.5;opacity:.8}
-.phone-wrap{max-width:260px;margin:0 auto;position:relative;will-change:transform}
-.phone-shell{background:linear-gradient(145deg,var(--lavender) 0%,var(--periwinkle) 60%,#b8a8e0 100%);border-radius:44px;padding:14px;box-shadow:0 0 0 1px rgba(255,255,255,.4) inset,0 40px 80px rgba(42,31,45,.22),0 8px 24px rgba(201,184,232,.4);position:relative}
+.phone-wrap{max-width:300px;margin:0 auto;position:relative;will-change:transform}
+.phone-wrap::before{content:'';position:absolute;inset:-18% -22%;z-index:-1;background:radial-gradient(ellipse 55% 55% at 30% 25%,rgba(201,184,232,.85) 0%,transparent 65%),radial-gradient(ellipse 50% 50% at 75% 80%,rgba(242,212,215,.8) 0%,transparent 62%);filter:blur(34px);border-radius:50%;animation:halo 7s ease-in-out infinite}
+@keyframes halo{0%,100%{transform:scale(1) rotate(0deg);opacity:.85}50%{transform:scale(1.12) rotate(8deg);opacity:1}}
+.del-badge{position:absolute;background:#fff;border-radius:14px;padding:10px 14px;box-shadow:0 10px 28px rgba(42,31,45,.16);display:flex;align-items:center;gap:7px;white-space:nowrap;z-index:4;font-family:'DM Mono',monospace;font-size:11px;color:var(--plum);font-weight:500}
+.del-badge .di{font-size:16px}
+.db1{top:18%;right:-26px;animation:floatA 3.4s ease-in-out infinite}
+.db2{bottom:14%;left:-30px;animation:floatB 4.2s ease-in-out infinite}
+.phone-shell{background:linear-gradient(145deg,var(--lavender) 0%,var(--periwinkle) 60%,#b8a8e0 100%);border-radius:44px;padding:14px;box-shadow:0 0 0 1px rgba(255,255,255,.4) inset,0 40px 80px rgba(42,31,45,.22),0 8px 24px rgba(201,184,232,.4);position:relative;animation:floatA 5s ease-in-out infinite}
 .phone-shell::before{content:'';position:absolute;top:8px;left:12px;right:60%;bottom:50%;background:linear-gradient(135deg,rgba(255,255,255,.35) 0%,transparent 100%);border-radius:30px 20px 0 0;pointer-events:none}
 .phone-screen{border-radius:32px;overflow:hidden;aspect-ratio:9/16;position:relative;background:var(--cream)}
 .phone-notch{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:72px;height:22px;background:linear-gradient(135deg,#1a1225,#2A1F2D);border-radius:20px;z-index:3;box-shadow:0 2px 8px rgba(0,0,0,.3)}
@@ -169,13 +175,15 @@ footer span{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;c
 @keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
 @media(max-width:900px){
   :root{--pad:24px}.nav-links{display:none}
-  #hero{padding-bottom:160px}
+  #hero{display:block;min-height:auto;padding:108px var(--pad) 96px}
+  .hero-inner{gap:36px}
   .hero-inner{grid-template-columns:1fr}.hero-photos{order:-1;height:400px}
   .photo-primary{width:70%}.photo-secondary{width:54%;height:48%}
   .stats-inner{grid-template-columns:1fr}
   .stat-item:not(:last-child){border-right:none;border-bottom:1px solid rgba(221,208,240,.15);padding-right:0;padding-bottom:32px}
   .stat-item:not(:first-child){padding-left:0;padding-top:32px}
   .cat-grid{grid-template-columns:1fr 1fr}.del-inner{grid-template-columns:1fr}
+  .db1{right:0}.db2{left:0}
   footer{flex-direction:column;gap:8px}
 }
 @media(max-width:560px){.cat-grid{grid-template-columns:1fr}.hero-photos{height:320px}.hero-cta-row{flex-wrap:wrap;gap:18px}.btn-mag{padding:14px 28px}}
@@ -341,6 +349,8 @@ footer span{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;c
     </div>
     <div class="reveal" style="transition-delay:.15s">
       <div class="phone-wrap">
+        <div class="del-badge db1"><span class="di">▶</span>459K views</div>
+        <div class="del-badge db2"><span class="di">✦</span>9:16 vertical</div>
         <div class="phone-shell">
           <div class="phone-screen">
             <div class="phone-notch"></div>
