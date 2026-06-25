@@ -10,6 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+img{-webkit-user-drag:none;-khtml-user-drag:none;-moz-user-drag:none;-o-user-drag:none;user-drag:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 :root{--blush:#F5E6E8;--lavender:#DDD0F0;--cream:#FAF7F5;--plum:#2A1F2D;--periwinkle:#C9B8E8;--rose:#F2D4D7;--ink:#3D2D42;--max:760px;--pad:24px}
 html{scroll-behavior:smooth}
 body{font-family:'DM Sans',sans-serif;color:var(--ink);background:var(--cream);-webkit-font-smoothing:antialiased;min-height:100vh;position:relative;overflow-x:hidden}
@@ -319,6 +320,11 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;background:radial-grad
 </div>
 
 <script>
+// Image protection - deter casual right-click-save and drag-off
+['contextmenu','dragstart'].forEach(function(ev){
+  document.addEventListener(ev,function(e){ if(e.target && e.target.tagName==='IMG') e.preventDefault(); });
+});
+
 // Tap-to-copy discount codes
 document.querySelectorAll('.code').forEach(function(btn){
   btn.addEventListener('click', function(){

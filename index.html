@@ -10,6 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+img{-webkit-user-drag:none;-khtml-user-drag:none;-moz-user-drag:none;-o-user-drag:none;user-drag:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 :root{--blush:#F5E6E8;--lavender:#DDD0F0;--cream:#FAF7F5;--plum:#2A1F2D;--periwinkle:#C9B8E8;--rose:#F2D4D7;--ink:#3D2D42;--max:1160px;--pad:48px}
 html{scroll-behavior:smooth}
 body{background:var(--cream);color:var(--ink);font-family:'DM Sans',sans-serif;font-weight:300;cursor:none;overflow-x:hidden}
@@ -190,6 +191,7 @@ footer span{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;c
   .hero-inner{gap:36px}
   .hero-inner{grid-template-columns:1fr}.hero-photos{order:-1;height:400px}
   .photo-primary{width:70%}.photo-secondary{width:54%;height:48%}
+  .photo-primary img,.photo-secondary img{object-position:center center}
   .stats-inner{grid-template-columns:1fr}
   .stat-item:not(:last-child){border-right:none;border-bottom:1px solid rgba(221,208,240,.15);padding-right:0;padding-bottom:32px}
   .stat-item:not(:first-child){padding-left:0;padding-top:32px}
@@ -668,6 +670,11 @@ track.addEventListener('wheel',function(e){
   },true);
 })();
 
+// IMAGE PROTECTION - deter casual right-click-save and drag-off
+['contextmenu','dragstart'].forEach(function(ev){
+  document.addEventListener(ev,function(e){ if(e.target && e.target.tagName==='IMG') e.preventDefault(); });
+});
+
 // MOBILE NAV - hamburger toggle
 (function(){
   var toggle=document.getElementById('navToggle');
@@ -723,6 +730,15 @@ new IntersectionObserver(entries=>{
   var heroH = hero.offsetHeight;
   function onScroll(){
     var sy = window.scrollY;
+    // On mobile the layered drag pushes content down into the stats section,
+    // covering the CTA buttons too soon - keep the hero static there.
+    if(window.innerWidth <= 900){
+      videoWrap.style.transform = '';
+      heroInner.style.transform = '';
+      if(heroText) heroText.style.transform = '';
+      if(heroPhotos) heroPhotos.style.transform = '';
+      return;
+    }
     if(sy > heroH * 1.2) return;
     // Video drifts slowest - subtle upward drift, very cinematic
     videoWrap.style.transform = 'translateY(' + (sy * 0.25) + 'px)';
