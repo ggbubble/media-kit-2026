@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ggbubbletea · Shop</title>
-<meta name="description" content="My storefront — everything I promote, with discount codes. Cute tech, soft aesthetic.">
+<meta name="description" content="My storefront with everything I promote, plus my discount codes. Cute tech, soft aesthetic.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -48,6 +48,8 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;background:radial-grad
 .buy-btn:hover{background:#42304a}
 .buy-btn:active{transform:scale(.96)}
 .buy-btn svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2.2}
+.buy-btn.free{background:var(--periwinkle);color:var(--plum)}
+.buy-btn.free:hover{background:var(--lavender)}
 
 /* copyable discount code */
 .code{display:inline-flex;align-items:center;gap:8px;background:var(--blush);border:1px dashed var(--periwinkle);color:var(--plum);font-family:'DM Mono',monospace;font-size:12px;font-weight:500;padding:9px 14px;border-radius:12px;cursor:pointer;transition:background .2s,transform .2s;position:relative;-webkit-tap-highlight-color:transparent}
@@ -81,7 +83,7 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;background:radial-grad
     <img class="shop-avatar" src="images/avatar.jpg" alt="ggbubbletea" loading="eager">
     <p class="shop-tag">✦ My storefront</p>
     <h1 class="shop-title">Everything I <em>actually</em> use & love</h1>
-    <p class="shop-sub">My honest picks of cute tech and soft-aesthetic gear — with my discount codes. Tap a code to copy it. 💞</p>
+    <p class="shop-sub">My honest picks of cute tech and soft-aesthetic gear, plus my discount codes. Tap a code to copy it. 💞</p>
   </header>
 
   <!-- ===== COLLECTION: Insta360 ===== -->
@@ -159,9 +161,159 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;background:radial-grad
     </article>
   </section>
 
+  <!-- ===== COLLECTION: Samsung Galaxy Folder 2 ===== -->
+  <section class="collection">
+    <div class="collection-head">
+      <h2 class="collection-name">Samsung Galaxy Folder 2</h2>
+      <span class="collection-count">2 products</span>
+      <span class="collection-line"></span>
+    </div>
+
+    <article class="card">
+      <img class="card-img" src="images/samsung-folder2.jpg" alt="Samsung Galaxy Folder 2" loading="lazy">
+      <div class="card-body">
+        <h3 class="card-name">Samsung Galaxy Folder 2</h3>
+        <div class="card-actions">
+          <a class="buy-btn" href="https://ebay.us/nnnEde" target="_blank" rel="noopener">Shop now <svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <img class="card-img" src="images/samsung-folder2-case.jpg" alt="Clear case for Samsung Folder 2" loading="lazy">
+      <div class="card-body">
+        <h3 class="card-name">Clear Case for Folder 2</h3>
+        <div class="card-actions">
+          <a class="buy-btn" href="https://ebay.us/Hj6eWH" target="_blank" rel="noopener">Shop now <svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ===== COLLECTION: Keyboards ===== -->
+  <section class="collection">
+    <div class="collection-head">
+      <h2 class="collection-name">Keyboards</h2>
+      <span class="collection-count">3 products</span>
+      <span class="collection-line"></span>
+    </div>
+
+    <article class="card">
+      <img class="card-img" src="images/yunzii-c98.png" alt="Yunzii C98" loading="lazy">
+      <div class="card-body">
+        <h3 class="card-name">Yunzii C98</h3>
+        <div class="card-actions">
+          <a class="buy-btn" href="https://amzn.to/4sBxOVt" target="_blank" rel="noopener">Shop now <svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <img class="card-img" src="images/yunzii-c75.png" alt="Yunzii C75" loading="lazy">
+      <div class="card-body">
+        <h3 class="card-name">Yunzii C75</h3>
+        <div class="card-actions">
+          <a class="buy-btn" href="https://www.yunzii.com/products/yunzii-c75-cake-meow-wireless-mechanical-keyboard" target="_blank" rel="noopener">Shop now <svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <img class="card-img" src="images/yunzii-b87.png" alt="Yunzii B87 Keyboard" loading="lazy">
+      <div class="card-body">
+        <h3 class="card-name">Yunzii B87 Keyboard</h3>
+        <div class="card-actions">
+          <a class="buy-btn" href="https://www.yunzii.com/products/yunzii-b87-qmk-via-custom-mechanical-keyboard" target="_blank" rel="noopener">Shop now <svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ===== COLLECTION: Microphones ===== -->
+  <section class="collection">
+    <div class="collection-head">
+      <h2 class="collection-name">Microphones</h2>
+      <span class="collection-count">3 products</span>
+      <span class="collection-line"></span>
+    </div>
+
+    <article class="card">
+      <img class="card-img" src="images/takstar-sm20.jpg" alt="Takstar SM20" loading="lazy">
+      <div class="card-body">
+        <h3 class="card-name">Takstar SM20</h3>
+        <p class="card-note">My current mic for all voiceovers</p>
+        <div class="card-actions">
+          <a class="buy-btn" href="https://www.aliexpress.com/item/1005009343786147.html?pdp_npi=4%40dis%21AUD%21AU%20%24166.69%21AU%20%24151.69%21%21%21107.00%2197.37%21%40210318ec17548156849586271e61b3%2112000048819205349%21sh%21AU%21896496459%21X&spm=a2g0o.store_pc_allItems_or_groupList.new_all_items_2007567334926.1005009343786147" target="_blank" rel="noopener">Shop now <svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <img class="card-img" src="images/takstar-mixer.jpg" alt="Takstar audio mixer" loading="lazy">
+      <div class="card-body">
+        <h3 class="card-name">Takstar Audio Mixer</h3>
+        <div class="card-actions">
+          <a class="buy-btn" href="https://www.aliexpress.com/item/1005006289849381.html?pdp_npi=4%40dis%21AUD%21AU%20%24270.96%21AU%20%24251.99%21%21%21173.94%21161.76%21%402101ec1a17548161268846999ed73b%2112000045522056410%21sh%21AU%21896496459%21X&spm=a2g0o.store_pc_allItems_or_groupList.new_all_items_2007567334926.1005006289849381" target="_blank" rel="noopener">Shop now <svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <img class="card-img" src="images/feelworld-pm1.jpg" alt="Feelworld PM1" loading="lazy">
+      <div class="card-body">
+        <h3 class="card-name">Feelworld PM1</h3>
+        <div class="card-actions">
+          <a class="buy-btn" href="https://amzn.to/4jYU0UR" target="_blank" rel="noopener">Shop now <svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ===== COLLECTION: My Art & Downloads ===== -->
+  <section class="collection">
+    <div class="collection-head">
+      <h2 class="collection-name">My Art &amp; Downloads</h2>
+      <span class="collection-count">3 files</span>
+      <span class="collection-line"></span>
+    </div>
+
+    <article class="card">
+      <img class="card-img" src="images/ggbubble-wallpaper.jpg" alt="Pastel hand-drawn wallpaper" loading="lazy">
+      <div class="card-body">
+        <h3 class="card-name">Pastel Hand-drawn Wallpaper</h3>
+        <p class="card-note">Desktop, phone &amp; Apple Watch</p>
+        <div class="card-actions">
+          <a class="buy-btn" href="https://www.etsy.com/au/listing/1689307307/hand-drawn-wallpaper-desktop-phone-apple?ref=share_v4_lx" target="_blank" rel="noopener">Get for $1.70 <svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <img class="card-img" src="images/ggbubble-ddr-art.jpg" alt="DDR art free download" loading="lazy">
+      <div class="card-body">
+        <h3 class="card-name">DDR Art</h3>
+        <p class="card-note">Free download</p>
+        <div class="card-actions">
+          <a class="buy-btn free" href="https://drive.google.com/drive/folders/12Ruu1hFWe7eNukQ0NzhqRk9efw-xuJh-?usp=sharing" target="_blank" rel="noopener">Download free <svg viewBox="0 0 24 24"><path d="M12 4v11m0 0l-4-4m4 4l4-4M5 19h14"/></svg></a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <img class="card-img" src="images/ggbubble-mascot-lineart.jpg" alt="GGBubble mascot colouring line-art" loading="lazy">
+      <div class="card-body">
+        <h3 class="card-name">GGBubble Mascot Colouring Line-art</h3>
+        <p class="card-note">Free download</p>
+        <div class="card-actions">
+          <a class="buy-btn free" href="https://drive.google.com/drive/folders/1EXwiw0rINpCq_yIATlXSdjThNTncet2B?usp=drive_link" target="_blank" rel="noopener">Download free <svg viewBox="0 0 24 24"><path d="M12 4v11m0 0l-4-4m4 4l4-4M5 19h14"/></svg></a>
+        </div>
+      </div>
+    </article>
+  </section>
+
   <footer class="shop-foot">
     <a href="/">← back to ggbubbletea</a>
-    <span class="disc">Some links are affiliate links — I may earn a small commission at no extra cost to you. I only feature things I genuinely use and love. 💞</span>
+    <span class="disc">Some links are affiliate links, so I may earn a small commission at no extra cost to you. I only feature things I genuinely use and love. 💞</span>
   </footer>
 
 </div>

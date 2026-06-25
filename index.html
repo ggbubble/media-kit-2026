@@ -130,7 +130,7 @@ body.menu-open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotate(-
 .phone-screen-img{width:100%;height:100%;object-fit:cover;object-position:50% 0%;display:block}
 .phone-label{position:absolute;bottom:-28px;left:50%;transform:translateX(-50%);font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.12em;color:var(--periwinkle);text-transform:uppercase;white-space:nowrap}
 
-/* PARTNERS — logo cards */
+/* PARTNERS - logo cards */
 #partners{padding:100px var(--pad)}
 .partners-inner{max-width:var(--max);margin:0 auto}
 .partners-grid{margin-top:48px;display:flex;flex-wrap:wrap;gap:16px;align-items:center}
@@ -568,7 +568,7 @@ heroSection.addEventListener('mouseleave',()=>{
   [photoP,photoS].forEach(el=>{el.style.transition='transform .7s cubic-bezier(.16,1,.3,1)';el.style.transform='';});
 });
 
-// WORK TRACK — only intercept horizontal trackpad swipes, never block vertical scroll
+// WORK TRACK - only intercept horizontal trackpad swipes, never block vertical scroll
 const track=document.getElementById('work-track');
 track.addEventListener('wheel',function(e){
   const absX=Math.abs(e.deltaX);
@@ -583,7 +583,7 @@ track.addEventListener('wheel',function(e){
   }
 },{passive:false});
 
-// WORK TRACK — polished click-and-drag with momentum
+// WORK TRACK - polished click-and-drag with momentum
 (function(){
   let isDown=false, startX=0, scrollStart=0;
   let hasDragged=false, dragEndTime=0;
@@ -657,7 +657,7 @@ track.addEventListener('wheel',function(e){
   document.addEventListener('mouseup',endDrag);
   document.addEventListener('mouseleave',endDrag);
 
-  // Block clicks for 300ms after any drag ends — covers both the immediate
+  // Block clicks for 300ms after any drag ends - covers both the immediate
   // mouseup click and any click that fires during the momentum animation.
   track.addEventListener('click',e=>{
     if(hasDragged||Date.now()-dragEndTime<300){
@@ -667,7 +667,7 @@ track.addEventListener('wheel',function(e){
   },true);
 })();
 
-// MOBILE NAV — hamburger toggle
+// MOBILE NAV - hamburger toggle
 (function(){
   var toggle=document.getElementById('navToggle');
   var links=document.getElementById('navLinks');
@@ -680,7 +680,7 @@ track.addEventListener('wheel',function(e){
   links.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',close); });
 })();
 
-// DELIVERABLE BADGES — pop in like messages when the phone scrolls into view
+// DELIVERABLE BADGES - pop in like messages when the phone scrolls into view
 (function(){
   var phone=document.querySelector('.phone-wrap');
   if(!phone||!('IntersectionObserver' in window))return;
@@ -711,7 +711,7 @@ new IntersectionObserver(entries=>{
   if(entries[0].isIntersecting&&!counted){counted=true;document.querySelectorAll('[data-target]').forEach((el,i)=>setTimeout(()=>counter(el),i*150));}
 },{threshold:.3}).observe(document.getElementById('stats'));
 
-// HERO PARALLAX — layered drag effect on scroll
+// HERO PARALLAX - layered drag effect on scroll
 (function(){
   var hero = document.getElementById('hero');
   var videoWrap = document.getElementById('hero-video-wrap');
@@ -723,25 +723,25 @@ new IntersectionObserver(entries=>{
   function onScroll(){
     var sy = window.scrollY;
     if(sy > heroH * 1.2) return;
-    // Video drifts slowest — subtle upward drift, very cinematic
+    // Video drifts slowest - subtle upward drift, very cinematic
     videoWrap.style.transform = 'translateY(' + (sy * 0.25) + 'px)';
     // The whole inner content lags behind scroll
     heroInner.style.transform = 'translateY(' + (sy * 0.18) + 'px)';
-    // Text drags a touch slower than photos — adds depth
+    // Text drags a touch slower than photos - adds depth
     if(heroText) heroText.style.transform = 'translateY(' + (sy * 0.06) + 'px)';
-    // Photos move slightly faster than text — they feel heavier
+    // Photos move slightly faster than text - they feel heavier
     if(heroPhotos) heroPhotos.style.transform = 'translateY(' + (sy * -0.04) + 'px)';
   }
   window.addEventListener('scroll', onScroll, {passive:true});
   // Also handle tilt on hero photos (already existing) stays intact
 })();
 
-// GLOBAL SCROLL DRAG — subtle layered lag for content below the hero
+// GLOBAL SCROLL DRAG - subtle layered lag for content below the hero
 (function(){
   var items = [].slice.call(document.querySelectorAll('[data-drag]'));
   if(!items.length) return;
   var vh = window.innerHeight;
-  var CAP = 64; // px — clamp so content never drifts far enough to leave gaps
+  var CAP = 64; // px - clamp so content never drifts far enough to leave gaps
   window.addEventListener('resize', function(){ vh = window.innerHeight; }, {passive:true});
   var ticking = false;
   function update(){
@@ -762,7 +762,7 @@ new IntersectionObserver(entries=>{
   update();
 })();
 
-// PHONE SPIN-IN — the "what you get" mockup grows and spins flat as it scrolls in
+// PHONE SPIN-IN - the "what you get" mockup grows and spins flat as it scrolls in
 (function(){
   var phone = document.querySelector('.phone-wrap');
   if(!phone) return;
