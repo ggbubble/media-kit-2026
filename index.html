@@ -537,7 +537,7 @@ for(let i=0;i<6;i++){
 const hn=document.getElementById('hn');
 const intro="hi, i’m";const name2="ggbubbletea";
 let h='<span class="line-intro">';
-[...intro].forEach((c,i)=>h+=`<span class="char" style="animation-delay:${0.3+i*0.045}s">${c}</span>`);
+[...intro].forEach((c,i)=>h+=`<span class="char" style="animation-delay:${0.3+i*0.045}s">${c===' '?'&nbsp;':c}</span>`);
 h+='</span>';
 [...name2].forEach((c,i)=>h+=`<span class="char" style="animation-delay:${0.3+intro.length*0.045+0.08+i*0.04}s">${c}</span>`);
 hn.innerHTML=h;
