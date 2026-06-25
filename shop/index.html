@@ -53,9 +53,9 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;background:radial-grad
 .code{display:inline-flex;align-items:center;gap:8px;background:var(--blush);border:1px dashed var(--periwinkle);color:var(--plum);font-family:'DM Mono',monospace;font-size:12px;font-weight:500;padding:9px 14px;border-radius:12px;cursor:pointer;transition:background .2s,transform .2s;position:relative;-webkit-tap-highlight-color:transparent}
 .code:hover{background:#f6dde0}
 .code:active{transform:scale(.96)}
-.code .code-label{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--periwinkle)}
-.code .code-val{letter-spacing:.04em}
-.code .copy-ic{width:13px;height:13px;fill:none;stroke:var(--periwinkle);stroke-width:2;flex-shrink:0}
+.code .code-label{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(61,45,66,.6)}
+.code .code-val{letter-spacing:.04em;font-weight:500;color:var(--plum)}
+.code .copy-ic{width:13px;height:13px;fill:none;stroke:var(--plum);stroke-width:2;flex-shrink:0}
 .code.copied{background:var(--lavender);border-style:solid}
 .code.copied .copied-flag{opacity:1;transform:translateY(0)}
 .copied-flag{position:absolute;top:-9px;right:8px;background:var(--plum);color:#fff;font-size:8px;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:8px;opacity:0;transform:translateY(4px);transition:opacity .2s,transform .2s;pointer-events:none}

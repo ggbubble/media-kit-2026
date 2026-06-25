@@ -24,6 +24,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .nav-links{display:flex;gap:32px;list-style:none}
 .nav-links a{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--ink);text-decoration:none;opacity:.6;transition:opacity .2s}
 .nav-links a:hover{opacity:1}
+.nav-toggle{display:none;flex-direction:column;justify-content:center;gap:5px;width:40px;height:40px;background:none;border:none;cursor:pointer;padding:8px;margin:-8px -8px -8px 0;z-index:101}
+.nav-toggle span{display:block;width:22px;height:2px;background:var(--plum);border-radius:2px;transition:transform .3s,opacity .3s}
+body.menu-open .nav-toggle span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+body.menu-open .nav-toggle span:nth-child(2){opacity:0}
+body.menu-open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
 #hero{min-height:100vh;display:flex;align-items:center;padding:120px var(--pad) 80px;position:relative;overflow:hidden;background:var(--plum)}
 #hero-video-wrap{position:absolute;inset:0;z-index:0;overflow:hidden;will-change:transform}
@@ -175,7 +180,12 @@ footer span{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;c
 @keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 @keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
 @media(max-width:900px){
-  :root{--pad:24px}.nav-links{display:none}
+  :root{--pad:24px}
+  .nav-toggle{display:flex}
+  .nav-links{position:fixed;top:62px;left:0;right:0;flex-direction:column;gap:0;background:rgba(250,247,245,.97);backdrop-filter:blur(14px);border-bottom:1px solid rgba(221,208,240,.4);padding:8px 0;transform:translateY(-14px);opacity:0;pointer-events:none;transition:opacity .28s ease,transform .28s ease}
+  body.menu-open .nav-links{opacity:1;transform:none;pointer-events:auto}
+  .nav-links li{width:100%}
+  .nav-links a{display:block;padding:15px var(--pad);font-size:13px;opacity:.85}
   #hero{display:block;min-height:auto;padding:108px var(--pad) 96px}
   .hero-inner{gap:36px}
   .hero-inner{grid-template-columns:1fr}.hero-photos{order:-1;height:400px}
@@ -197,7 +207,8 @@ footer span{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;c
 
 <nav>
   <a class="nav-logo" href="#hero">ggbubbletea ✦</a>
-  <ul class="nav-links">
+  <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  <ul class="nav-links" id="navLinks">
     <li><a href="#stats">Stats</a></li><li><a href="#work">Work</a></li>
     <li><a href="#deliverable">Format</a></li><li><a href="#partners">Partners</a></li>
     <li><a href="#contact">Collab</a></li><li><a href="/shop">Shop ✦</a></li>
@@ -654,6 +665,19 @@ track.addEventListener('wheel',function(e){
       e.stopPropagation();
     }
   },true);
+})();
+
+// MOBILE NAV — hamburger toggle
+(function(){
+  var toggle=document.getElementById('navToggle');
+  var links=document.getElementById('navLinks');
+  if(!toggle||!links)return;
+  function close(){ document.body.classList.remove('menu-open'); toggle.setAttribute('aria-expanded','false'); }
+  toggle.addEventListener('click',function(){
+    var open=document.body.classList.toggle('menu-open');
+    toggle.setAttribute('aria-expanded',open?'true':'false');
+  });
+  links.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',close); });
 })();
 
 // DELIVERABLE BADGES — pop in like messages when the phone scrolls into view
