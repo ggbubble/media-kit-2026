@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,20 +25,24 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .nav-links a{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--ink);text-decoration:none;opacity:.6;transition:opacity .2s}
 .nav-links a:hover{opacity:1}
 
-#hero{min-height:100vh;display:flex;align-items:center;padding:120px var(--pad) 80px;position:relative;overflow:hidden;background:radial-gradient(ellipse 70% 60% at 80% 20%,rgba(221,208,240,.55) 0%,transparent 65%),radial-gradient(ellipse 50% 50% at 15% 80%,rgba(245,230,232,.5) 0%,transparent 60%),radial-gradient(ellipse 40% 40% at 50% 50%,rgba(242,212,215,.2) 0%,transparent 70%),var(--cream)}
-#hero-bubbles{position:absolute;inset:0;pointer-events:none;z-index:0}
-.hero-inner{width:100%;max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:64px;position:relative;z-index:1}
-.hero-text{position:relative;z-index:2}
+#hero{min-height:100vh;display:flex;align-items:center;padding:120px var(--pad) 80px;position:relative;overflow:hidden;background:var(--plum)}
+#hero-video-wrap{position:absolute;inset:0;z-index:0;overflow:hidden;will-change:transform}
+#hero-video-wrap video{position:absolute;top:50%;left:50%;width:177.78vh;height:100vh;min-width:100%;min-height:56.25vw;transform:translate(-50%,-50%);pointer-events:none;object-fit:cover}
+#hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(135deg,rgba(42,31,45,.72) 0%,rgba(42,31,45,.5) 40%,rgba(42,31,45,.35) 100%)}
+#hero-overlay::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 80% 20%,rgba(201,184,232,.18) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 10% 80%,rgba(245,230,232,.12) 0%,transparent 60%)}
+#hero-bubbles{position:absolute;inset:0;pointer-events:none;z-index:2}
+.hero-inner{width:100%;max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:64px;position:relative;z-index:3;will-change:transform}
+.hero-text{position:relative;z-index:2;will-change:transform}
 .hero-eyebrow{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.14em;color:var(--periwinkle);text-transform:uppercase;margin-bottom:20px;opacity:0;animation:fadeUp .6s ease .2s forwards}
-.hero-name{font-family:'Fraunces',serif;font-size:clamp(48px,5.5vw,84px);font-weight:300;line-height:.93;letter-spacing:-.03em;color:var(--plum);margin-bottom:28px;overflow:hidden}
-.hero-name .line-intro{font-size:clamp(22px,2.8vw,40px);font-style:italic;color:var(--periwinkle);display:block;margin-bottom:4px}
+.hero-name{font-family:'Fraunces',serif;font-size:clamp(48px,5.5vw,84px);font-weight:300;line-height:.93;letter-spacing:-.03em;color:#fff;margin-bottom:28px;overflow:hidden}
+.hero-name .line-intro{font-size:clamp(22px,2.8vw,40px);font-style:italic;color:var(--lavender);display:block;margin-bottom:4px}
 .char{display:inline-block;opacity:0;transform:translateY(60px) rotate(3deg);animation:charIn .5s cubic-bezier(.16,1,.3,1) forwards}
-.hero-tagline{font-size:15px;line-height:1.7;color:var(--ink);opacity:0;max-width:360px;margin-bottom:40px;animation:fadeUp .6s ease 1s forwards}
+.hero-tagline{font-size:15px;line-height:1.7;color:rgba(255,255,255,.82);opacity:0;max-width:360px;margin-bottom:40px;animation:fadeUp .6s ease 1s forwards}
 .hero-cta-row{display:flex;align-items:center;gap:24px;opacity:0;animation:fadeUp .6s ease 1.2s forwards}
-.btn-mag{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:var(--plum);color:var(--cream);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;text-decoration:none;border-radius:100px;border:none;transition:background .3s;will-change:transform}
-.btn-mag:hover{background:var(--ink)}
-.btn-ghost{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.1em;color:var(--ink);text-decoration:none;opacity:.5;transition:opacity .2s;border-bottom:1px solid currentColor;padding-bottom:2px}
-.btn-ghost:hover{opacity:1}
+.btn-mag{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:var(--lavender);color:var(--plum);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;text-decoration:none;border-radius:100px;border:none;transition:background .3s;will-change:transform}
+.btn-mag:hover{background:var(--cream)}
+.btn-ghost{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.1em;color:rgba(255,255,255,.6);text-decoration:none;transition:color .2s;border-bottom:1px solid rgba(255,255,255,.3);padding-bottom:2px}
+.btn-ghost:hover{color:#fff;border-color:#fff}
 
 .hero-photos{position:relative;z-index:2;height:580px;opacity:0;animation:fadeIn .8s ease .8s forwards}
 .photo-primary{position:absolute;right:0;top:0;width:68%;height:100%;border-radius:24px 24px 80px 24px;overflow:hidden;box-shadow:0 40px 80px rgba(42,31,45,.16),0 0 0 1px rgba(221,208,240,.4);will-change:transform;transition:transform .08s ease-out}
@@ -190,6 +195,13 @@ footer span{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;c
 </nav>
 
 <section id="hero">
+  <div id="hero-video-wrap">
+    <!-- To swap video: change the src filename below to a different .mp4 in the same folder -->
+    <video autoplay muted loop playsinline preload="auto" aria-hidden="true">
+      <source src="highlight_reel_bkg.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div id="hero-overlay"></div>
   <div class="hero-inner">
     <div class="hero-text">
       <p class="hero-eyebrow">✦ Media Kit 2026</p>
@@ -643,7 +655,31 @@ new IntersectionObserver(entries=>{
   if(entries[0].isIntersecting&&!counted){counted=true;document.querySelectorAll('[data-target]').forEach((el,i)=>setTimeout(()=>counter(el),i*150));}
 },{threshold:.3}).observe(document.getElementById('stats'));
 
-// MAGNETIC BUTTONS
+// HERO PARALLAX — layered drag effect on scroll
+(function(){
+  var hero = document.getElementById('hero');
+  var videoWrap = document.getElementById('hero-video-wrap');
+  var heroInner = document.querySelector('.hero-inner');
+  var heroText = document.querySelector('.hero-text');
+  var heroPhotos = document.getElementById('hero-photos');
+  if(!hero) return;
+  var heroH = hero.offsetHeight;
+  function onScroll(){
+    var sy = window.scrollY;
+    if(sy > heroH * 1.2) return;
+    // Video drifts slowest — subtle upward drift, very cinematic
+    videoWrap.style.transform = 'translateY(' + (sy * 0.25) + 'px)';
+    // The whole inner content lags behind scroll
+    heroInner.style.transform = 'translateY(' + (sy * 0.18) + 'px)';
+    // Text drags a touch slower than photos — adds depth
+    if(heroText) heroText.style.transform = 'translateY(' + (sy * 0.06) + 'px)';
+    // Photos move slightly faster than text — they feel heavier
+    if(heroPhotos) heroPhotos.style.transform = 'translateY(' + (sy * -0.04) + 'px)';
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  // Also handle tilt on hero photos (already existing) stays intact
+})();
+
 function magBtn(btn,str){
   btn.addEventListener('mousemove',e=>{
     const r=btn.getBoundingClientRect();btn.style.transition='none';
