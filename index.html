@@ -222,7 +222,7 @@ footer span{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;c
 </section>
 
 <section id="stats">
-  <div class="stats-inner" data-drag="0.05">
+  <div class="stats-inner" data-drag="0.09">
     <div class="stat-item reveal">
       <div class="stat-platform">TikTok</div>
       <div class="stat-number" data-target="28" data-suffix="K+">0</div>
@@ -245,7 +245,7 @@ footer span{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;c
 </section>
 
 <div class="section-wrap" id="what">
-  <div class="section-inner" data-drag="0.05">
+  <div class="section-inner" data-drag="0.09">
     <p class="section-eyebrow reveal">Content I create</p>
     <h2 class="section-title reveal">I make content for brands that feel <em>at home</em> in my world.</h2>
     <div class="cat-grid">
@@ -261,7 +261,7 @@ footer span{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;c
 
 <section id="work">
   <div class="work-header">
-    <div class="work-header-text">
+    <div class="work-header-text" data-drag="0.08">
       <div>
         <p class="section-eyebrow reveal">Selected work</p>
         <h2 class="section-title reveal" style="margin-bottom:0">Past <em>collaborations</em></h2>
@@ -325,7 +325,7 @@ footer span{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;c
 
 <section id="deliverable">
   <canvas id="del-canvas"></canvas>
-  <div class="del-inner">
+  <div class="del-inner" data-drag="0.08">
     <div class="reveal">
       <p class="section-eyebrow">What you get</p>
       <h2 class="section-title">One format.<br>Done <em>well.</em></h2>
@@ -353,7 +353,7 @@ footer span{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;c
 </section>
 
 <section id="partners">
-  <div class="partners-inner">
+  <div class="partners-inner" data-drag="0.08">
     <p class="section-eyebrow reveal">Brands I've worked with</p>
     <h2 class="section-title reveal">Past <em>partners</em></h2>
     <div class="partners-grid reveal">
@@ -377,7 +377,7 @@ footer span{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;c
 </section>
 
 <section id="contact">
-  <div class="contact-inner">
+  <div class="contact-inner" data-drag="0.08">
     <h2 class="contact-title">Helping brands embrace their<br><em>cute side.</em></h2>
     <p class="contact-sub">Reach out to discuss rates, formats, and fit.</p>
     <a href="mailto:ggbubble.collabs@gmail.com" class="btn-cta" id="cta-btn">ggbubble.collabs@gmail.com ✦</a>
@@ -685,7 +685,7 @@ new IntersectionObserver(entries=>{
   var items = [].slice.call(document.querySelectorAll('[data-drag]'));
   if(!items.length) return;
   var vh = window.innerHeight;
-  var CAP = 28; // px — clamp so content never drifts far enough to leave gaps
+  var CAP = 64; // px — clamp so content never drifts far enough to leave gaps
   window.addEventListener('resize', function(){ vh = window.innerHeight; }, {passive:true});
   var ticking = false;
   function update(){
