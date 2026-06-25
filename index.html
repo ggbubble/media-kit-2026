@@ -664,7 +664,7 @@ track.addEventListener('wheel',function(e){
   new IntersectionObserver(function(entries){
     var show=entries[0].isIntersecting;
     badges.forEach(function(b){ b.classList.toggle('pop',show); });
-  },{threshold:.5}).observe(phone);
+  },{threshold:.75}).observe(phone);
 })();
 
 // STAT COUNTER
